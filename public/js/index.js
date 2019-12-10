@@ -77,25 +77,25 @@ $("#searchBtn").on("click", function (event) {
 });
 
 //this is the onclick function for the delete button
-$("#deleteBtn").on("click", function (event) {
-  event.preventDefault();
-  var id = $(this).data("id");
+// $("#deleteBtn").on("click", function (event) {
+//   event.preventDefault();
+//   var id = $(this).data("id");
 
-  console.log("delete button was clicked");
-  // Send the DELETE request.
-  $(document).on('click', '.delete-from-shelf', function() {
-    $(this).parent().remove();
-    $.ajax("/api/shelf", {
-      type: "DELETE",
-      url: "/api/shelf" + id
-    }).then(function (res){
-      console.log("Item Deleted")
-      console.log(res)
-      res.end();
-    })
+//   console.log("delete button was clicked");
+//   // Send the DELETE request.
+//   $(document).on('click', '.delete-from-shelf', function() {
+//     $(this).parent().remove();
+//     $.ajax("/api/shelf", {
+//       type: "DELETE",
+//       url: "/api/shelf" + id
+//     }).then(function (res){
+//       console.log("Item Deleted")
+//       console.log(res)
+//       res.end();
+//     })
     
-});
-});
+// });
+// });
 // end of delete button function
 
 
@@ -114,6 +114,16 @@ $(document).on("click", ".add-to-faves", function (event) {
   });
 });
 
+$(document).on("click", ".delete-from-shelf", function (event) {
+  event.preventDefault();
+  var itemId = $(this).attr("data-id");
+  $.ajax({
+      type: "DELETE",
+      url: "shelf" + itemId
+  }).then(function () {
+      location.reload();
+  });
+});
 // $(".delete-from-shelf").on("click", function (event) {
 //   event.preventDefault();
 //   var itemId = $(this).data("id");
